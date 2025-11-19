@@ -144,18 +144,13 @@ bands.close();
 
 
         //Reduction - sum
-
         double total = Stream.of(7.4,1.5,3.7,9.9)
                .reduce(0.0 ,(Double a, Double b)-> a+b)
                 ;
         System.out.println("total = "+total);
-
-
         System.out.println("_________summary Statics__________" );
         IntSummaryStatistics summary = IntStream.of(7,8,44,55,87,90).summaryStatistics();
         System.out.println(summary);
-
-
 
 
 
