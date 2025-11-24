@@ -39,12 +39,12 @@ public class StreamMaps {
 
 
 // Creating map from two arrays.
-        String [] keys = {"one","two","four"};
-        Integer[] values ={1,2,3};
+        String [] keys = {"one","two","four","one"};
+        Integer[] values ={1,2,3,9};
 //should make sure that both string and integer should be of same length..
         Map<String,Integer> maps = IntStream.range(0, keys.length)
                 .boxed()
-                .collect(Collectors.toMap(i->keys[i],i->values[i]));
+                .collect(Collectors.toMap(i->keys[i],i->values[i] ,(key1,key2)->key1));
         System.out.println(maps);
 
         System.out.println("____________________________________");
