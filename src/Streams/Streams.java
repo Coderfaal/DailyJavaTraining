@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -93,17 +92,20 @@ public class Streams {
 Stream<String>bands =Files.lines(Paths.get("/home/labuser/IdeaProjects/NEWWORLD/src/bands.txt"));
 
 
-bands   .sorted()
-        .filter(z-> z.length()>13)
-        .forEach(System.out::println);
-bands.close();
+        bands
+                .sorted()
+                    .filter(z-> z.length()>13)
+                         .forEach(System.out::println);
+        bands.close();
 
         System.out.println("_________with files with list __________________"); // here we are storing the data into
         // list and then performing the streams operations
 
         List<String> bands2 =  Files.lines
                 (Paths.get("/home/labuser/IdeaProjects/NEWWORLD/src/bands.txt"))
-        .filter(x-> x.contains("jit")).collect(Collectors.toList());
+                                 .filter(x-> x
+                                         .contains("jit"))
+                                                .collect(Collectors.toList());
 
         bands2.forEach(x->System.out.println(x));
 
@@ -111,8 +113,8 @@ bands.close();
         Stream<String> rows1 = Files.lines(Paths.get("/home/labuser/IdeaProjects/NEWWORLD/src/data.txt"));
         int rowCount = (int) rows1
                 .map(z-> z.split(","))
-                .filter(z-> z.length==3)
-                .count();
+                    .filter(z-> z.length==3)
+                        .count();
 
         System.out.println(rowCount+ "rows");
         rows1.close();
@@ -123,10 +125,10 @@ bands.close();
         Stream<String> rows2 = Files.lines(Paths.get("/home/labuser/IdeaProjects/NEWWORLD/src/data.txt"));
         rows2
                 .map(z-> z.split(","))
-                .filter(z-> z.length==3)
-                .filter(z->Integer.parseInt(z[1])>15)
+                    .filter(z-> z.length==3)
+                        .filter(z->Integer.parseInt(z[1])>15)
               //  .filter(z-> Boolean.parseBoolean(String.valueOf(z[0]))) // try this later
-                .forEach(z-> System.out.println(z[0]+ "  "+z[1]+ " "+z[2]));
+                         .forEach(z-> System.out.println(z[0]+ "  "+z[1]+ " "+z[2]));
         rows2.close();
 
 //store fields in hashmap
@@ -134,8 +136,8 @@ bands.close();
         Map<String ,Integer> map1 = new HashMap<>();
         map1= rows3
                 .map(z-> z.split(","))
-                .filter(z-> z.length==3)
-                .filter(z->Integer.parseInt(z[1])>15).collect(Collectors.toMap(
+                        .filter(z-> z.length==3)
+                             .filter(z->Integer.parseInt(z[1])>15).collect(Collectors.toMap(
                         z->z[0], z->Integer.parseInt(z[1])));
         rows3.close();
         for(String key : map1.keySet())
@@ -151,12 +153,6 @@ bands.close();
         System.out.println("_________summary Statics__________" );
         IntSummaryStatistics summary = IntStream.of(7,8,44,55,87,90).summaryStatistics();
         System.out.println(summary);
-
-
-
-
-
-
 
 
 
